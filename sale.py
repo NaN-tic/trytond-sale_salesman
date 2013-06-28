@@ -3,9 +3,10 @@
 # the full copyright notices and license terms.
 
 from trytond.model import fields
-from trytond.pool import PoolMeta
+from trytond.pool import PoolMeta, Pool
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
+from trytond.backend import TableHandler
 
 
 __all__ = [
@@ -17,12 +18,37 @@ __metaclass__ = PoolMeta
 class Sale():
     __name__ = 'sale.sale'
 
-    salesman = fields.Many2One('res.user', 'Salesman',
+    employee = fields.Many2One('company.employee', 'Salesman',
         states={
             'readonly': Eval('state') != 'draft',
             },
         depends=['state'])
 
+    @classmethod
+    def __register__(cls, module_name):
+        pool = Pool()
+        User = pool.get('res.user')
+
+        cursor = Transaction().cursor
+        table = TableHandler(cursor, cls, module_name)
+
+        super(Sale, cls).__register__(module_name)
+
+        #Migration from 2.8: Salesman from user to employee
+        if table.column_exist('salesman'):
+            cursor.execute('update "%s" set employee = "%s".employee from "%s"'
+                ' where "%s".id = "%s".salesman' %
+                (cls._table, User._table,
+                    User._table, User._table, cls._table))
+            table.column_rename('salesman', 'salesman_deprecated')
+
     @staticmethod
-    def default_salesman():
-        return Transaction().user
+    def default_employee():
+        User = Pool().get('res.user')
+
+        if Transaction().context.get('employee'):
+            return Transaction().context['employee']
+        else:
+            user = User(Transaction().user)
+            if user.employee:
+                return user.employee.id

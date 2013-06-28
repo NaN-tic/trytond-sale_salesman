@@ -2,7 +2,7 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "field:sale.sale,salesman:"
+msgctxt "field:sale.sale,employee:"
 msgid "Salesman"
 msgstr "Vendedor"
 

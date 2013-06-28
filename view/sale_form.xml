@@ -4,7 +4,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 <data>
     <xpath expr="/form/notebook/page[@id=&quot;other&quot;]/label[@name=&quot;company&quot;]"
             position="before">
-        <label name="salesman"/>
-        <field name="salesman"/>
+        <label name="employee"/>
+        <field name="employee"/>
     </xpath>
 </data>
