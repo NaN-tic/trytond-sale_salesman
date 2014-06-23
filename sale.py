@@ -18,10 +18,13 @@ class Sale():
     __name__ = 'sale.sale'
 
     employee = fields.Many2One('company.employee', 'Salesman',
+        domain=[
+            ('company', '=', Eval('company', -1)),
+            ],
         states={
             'readonly': Eval('state') != 'draft',
             },
-        depends=['state'])
+        depends=['state', 'company'])
 
     @classmethod
     def __register__(cls, module_name):
