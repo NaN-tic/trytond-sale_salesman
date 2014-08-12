@@ -40,7 +40,7 @@ setup(name='trytonzz_sale_salesman',
     ],
     package_data={
         'trytond.modules.sale_salesman': info.get('xml', [])
-            + ['tryton.cfg', 'locale/*.po'],
+            + ['tryton.cfg', 'locale/*.po', 'view/*.xml'],
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
