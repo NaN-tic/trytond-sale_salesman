@@ -12,7 +12,7 @@ __all__ = ['Sale']
 __metaclass__ = PoolMeta
 
 
-class Sale():
+class Sale:
     __name__ = 'sale.sale'
 
     employee = fields.Many2One('company.employee', 'Salesman',
