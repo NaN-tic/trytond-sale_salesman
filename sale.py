@@ -8,9 +8,7 @@ from trytond.transaction import Transaction
 from trytond.pyson import Eval
 from trytond import backend
 
-__all__ = [
-    'Sale',
-]
+__all__ = ['Sale']
 __metaclass__ = PoolMeta
 
 
