@@ -29,9 +29,9 @@ class Sale:
         pool = Pool()
         User = pool.get('res.user')
 
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
         TableHandler = backend.get('TableHandler')
-        table = TableHandler(cursor, cls, module_name)
+        table = TableHandler(cls, module_name)
 
         super(Sale, cls).__register__(module_name)
 
