@@ -35,7 +35,7 @@ class Sale:
 
         super(Sale, cls).__register__(module_name)
 
-        #Migration from 2.8: Salesman from user to employee
+        # Migration from 2.8: Salesman from user to employee
         if table.column_exist('salesman'):
             cursor.execute('update "%s" set employee = "%s".employee from "%s"'
                 ' where "%s".id = "%s".salesman' %
