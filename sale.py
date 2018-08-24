@@ -11,8 +11,7 @@ from trytond import backend
 __all__ = ['Sale']
 
 
-class Sale:
-    __metaclass__ = PoolMeta
+class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
 
     employee = fields.Many2One('company.employee', 'Salesman',
