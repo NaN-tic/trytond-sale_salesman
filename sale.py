@@ -29,8 +29,7 @@ class Sale(metaclass=PoolMeta):
         User = pool.get('res.user')
 
         cursor = Transaction().connection.cursor()
-        TableHandler = backend.get('TableHandler')
-        table = TableHandler(cls, module_name)
+        table = backend.TableHandler(cls, module_name)
 
         super(Sale, cls).__register__(module_name)
 
