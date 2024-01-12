@@ -20,8 +20,7 @@ class Sale(metaclass=PoolMeta):
             ],
         states={
             'readonly': Eval('state') != 'draft',
-            },
-        depends=['state', 'company'])
+            })
 
     @classmethod
     def __register__(cls, module_name):
