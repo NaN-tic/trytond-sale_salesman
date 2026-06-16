@@ -6,7 +6,6 @@ from trytond.model import fields
 from trytond.pool import PoolMeta, Pool
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
-from trytond import backend
 
 __all__ = ['Sale']
 
@@ -28,7 +27,7 @@ class Sale(metaclass=PoolMeta):
         User = pool.get('res.user')
 
         cursor = Transaction().connection.cursor()
-        table = backend.TableHandler(cls, module_name)
+        table = cls.__table_handler__(module_name)
 
         super(Sale, cls).__register__(module_name)
 
